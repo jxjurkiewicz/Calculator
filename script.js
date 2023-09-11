@@ -22,7 +22,10 @@ class Calculator {
   }
 
   chooseOperation(operator) {
-    if (this.operation !== undefined) return;
+    if (this.currentOperand === "") return;
+    if (this.previousOperand !== "") {
+      this.compute();
+    }
     this.operation = operator;
     this.previousOperand = `${this.currentOperand}  ${operator}`;
     this.currentOperand = "";
@@ -87,7 +90,6 @@ deleteButton.addEventListener("click", () => {
 
 dataOperation.forEach((operator) => {
   operator.addEventListener("click", () => {
-    if (calculator.currentOperand === "") return;
     calculator.chooseOperation(operator.innerText);
     calculator.updateDisplay();
   });
